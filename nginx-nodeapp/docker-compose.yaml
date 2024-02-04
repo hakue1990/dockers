@@ -1,0 +1,42 @@
+version : '3'
+
+services:
+    lb:
+        image: nginx
+        ports:
+            - "8080:8080"
+        volumes:
+           - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+        depends_on:
+            - nodeapp1
+            - nodeapp2
+            - nodeapp3
+            - nodeapp4
+            - nodeapp5
+            - nodeapp6
+           
+                   
+    nodeapp1:
+        image: mainapp
+        environment:
+            - PORT=1111
+    nodeapp2:
+        image: mainapp
+        environment:
+            - PORT=2222
+    nodeapp3:
+        image: mainapp
+        environment:
+            - PORT=3333
+    nodeapp4:
+        image: mainapp
+        environment:
+            - PORT=4444
+    nodeapp5:
+        image: serviceapp
+        environment:
+            - PORT=5555
+    nodeapp6:
+        image: serviceapp
+        environment:
+            - PORT=6666
